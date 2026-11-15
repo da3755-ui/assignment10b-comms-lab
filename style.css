@@ -28,9 +28,53 @@ video {
 button{
     position: absolute;
     z-index: 5;
-    border-radius: 24px;
-    padding: 34px 90px;
-        top: 80%;
-     left: 40%;
+    font-size: 24px;
+    padding: 24px 90px;
+        top: 88%;
+     left: 2%;
 }
 
+.watch-text{
+    position:absolute;
+    z-index:6;
+    color: aliceblue;
+    top: 75%;
+     left: 2%;
+     font-size: 2em;
+      font-weight: bold;
+}
+
+.name-tags{
+    position:absolute;
+    z-index: 7;
+    color: white;
+    font-weight: bold;
+    font-size: 6em;
+    top: 22%;
+     left: 2%;
+}
+
+h1{
+    position:relative;
+    color:white;
+    font-weight:bold;
+    font-size: 2em;
+    text-align:center;
+}
+
+.about-page p2{
+     position:absolute;
+    color:white;
+    font-size: 2em;
+    text-align:center;
+}
+
+.vending-machine{
+    position: relative;
+     margin-top: 275px;
+
+}
+
+.vending-machine img{
+    z-index: 9;
+}

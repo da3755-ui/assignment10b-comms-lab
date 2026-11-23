@@ -167,3 +167,34 @@ h1 {
     background-color: #cccccc;
     transform: scale(1.05);
 }
+
+/* JAZEI CHOICES POP-UP ANIMATION */
+
+#jazei-choices {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#jazei-choices h2,
+#jazei-choices button {
+    animation: popUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

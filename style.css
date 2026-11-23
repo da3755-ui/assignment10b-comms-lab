@@ -1,13 +1,17 @@
-body{
+
+body {
     background-color: black;
+    margin: 0;
 }
+
+/* INTRO VIDEO */
 
 .video-section {
     position: relative;
     width: 100%;
 }
 
-video {
+.video-section video {
     display: block;
     width: 100%;
     height: 700px;
@@ -23,51 +27,63 @@ video {
     height: 100%;
     background-color: rgb(0 0 0 / 0.5);
     z-index: 4;
+    pointer-events: none;
 }
 
-button{
+/* PUSH TO START BUTTON */
+
+#start-button {
     position: absolute;
-    z-index: 5;
+    z-index: 8;
     font-size: 24px;
     padding: 24px 90px;
-        top: 88%;
-     left: 2%;
+    top: 88%;
+    left: 2%;
+    cursor: pointer;
 }
 
-.watch-text{
-    position:absolute;
-    z-index:6;
+/* INTRO TEXT */
+
+.watch-text {
+    position: absolute;
+    z-index: 6;
     color: aliceblue;
     top: 75%;
-     left: 2%;
-     font-size: 2em;
-      font-weight: bold;
+    left: 2%;
+    font-size: 2em;
+    font-weight: bold;
+    pointer-events: none;
 }
 
-.name-tags{
-    position:absolute;
+.name-tags {
+    position: absolute;
     z-index: 7;
     color: white;
     font-weight: bold;
     font-size: 6em;
     top: 22%;
-     left: 2%;
+    left: 2%;
+    pointer-events: none;
 }
 
-h1{
-    position:relative;
-    color:white;
-    font-weight:bold;
+/* ABOUT SECTION */
+
+h1 {
+    position: relative;
+    color: white;
+    font-weight: bold;
     font-size: 2em;
-    text-align:center;
+    text-align: center;
 }
 
-.about-page p2{
-     position:absolute;
-    color:white;
+.about-page p2 {
+    display: block;
+    color: white;
     font-size: 2em;
-    text-align:center;
+    text-align: center;
 }
+
+/* VENDING MACHINE SECTION */
 
 .vending-machine {
     position: relative;
@@ -93,19 +109,26 @@ h1{
     pointer-events: none;
 }
 
+/* JAZEI'S STORY */
+
 #jazei-scene {
     display: none;
     position: fixed;
     inset: 0;
+    width: 100%;
+    height: 100vh;
     background: black;
     z-index: 20;
 }
 
 #jazei-video {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+/* JAZEI'S THREE CHOICES */
 
 #jazei-choices {
     display: none;
@@ -119,11 +142,28 @@ h1{
     align-items: center;
     justify-content: center;
     gap: 20px;
+    text-align: center;
+}
+
+#jazei-choices h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 #jazei-choices button {
     position: static;
+    z-index: 22;
     padding: 15px 35px;
     font-size: 18px;
     cursor: pointer;
+    min-width: 250px;
+    background-color: white;
+    color: black;
+    border: none;
+    transition: 0.3s;
+}
+
+#jazei-choices button:hover {
+    background-color: #cccccc;
+    transform: scale(1.05);
 }

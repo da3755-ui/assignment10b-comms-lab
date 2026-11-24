@@ -1,4 +1,5 @@
- 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 body {
     background-color: black;
     margin: 0;
@@ -392,4 +393,163 @@ body {
     letter-spacing: 2px;
     color: white;
     margin: 0;
+}
+
+/* VISUAL DESIGN UPDATE */
+
+/* GLOBAL STYLE */
+
+body {
+    background-color: #0d0d0d;
+    color: #f5efe6;
+    font-family: 'Inter', sans-serif;
+}
+
+/* INTRO VIDEO OVERLAY */
+
+.shade {
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85),
+        rgba(0, 0, 0, 0.15)
+    );
+}
+
+/* CHARACTER NAMES */
+
+.name-tags {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    color: #f5efe6;
+    letter-spacing: 5px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* INTRO TEXT */
+
+.watch-text {
+    font-family: 'Inter', sans-serif;
+    color: #d4a574;
+    font-weight: 500;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+}
+
+/* START BUTTON */
+
+#start-button {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: #f5efe6;
+    background-color: rgba(13, 13, 13, 0.8);
+    border: 1px solid #d4a574;
+    border-radius: 4px;
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+}
+
+#start-button:hover {
+    background-color: #d4a574;
+    color: #0d0d0d;
+    box-shadow: 0 0 25px rgba(212, 165, 116, 0.3);
+}
+
+/* STORY OVERLAYS */
+
+#jazei-choices,
+#tiffy-message,
+#dina-choices {
+    background: rgba(13, 13, 13, 0.75);
+    color: #f5efe6;
+    backdrop-filter: blur(5px);
+}
+
+/* STORY TITLES */
+
+#jazei-choices h2,
+#tiffy-message h2,
+#dina-choices h2,
+#tiffy-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: #f5efe6;
+}
+
+/* STORY CHOICE BUTTONS */
+
+#jazei-choices button,
+#tiffy-message button,
+#dina-choices button {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    background-color: #1c1c1c;
+    color: #f5efe6;
+    border: 1px solid #d4a574;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+/* BUTTON HOVER EFFECT */
+
+#jazei-choices button:hover,
+#tiffy-message button:hover,
+#dina-choices button:hover {
+    background-color: #d4a574;
+    color: #0d0d0d;
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+    transform: scale(1.05);
+}
+
+/* ABOUT SECTION */
+
+.about-page {
+    color: #f5efe6;
+}
+
+.about-page h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #f5efe6;
+    letter-spacing: 6px;
+}
+
+.about-page h2 {
+    font-family: 'Oswald', sans-serif;
+    color: #d4a574;
+    letter-spacing: 4px;
+}
+
+.synopsis {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.9;
+    color: #b0aaa2;
+}
+
+/* CAST AND CREDITS */
+
+.credit-group {
+    border-top: 1px solid #d4a574;
+    padding-top: 25px;
+}
+
+.credit-group h3 {
+    font-family: 'Space Mono', monospace;
+    color: #d4a574;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.credit-group p {
+    color: #b0aaa2;
+    line-height: 1.8;
+}
+
+.credits strong {
+    color: #f5efe6;
 }

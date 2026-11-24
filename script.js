@@ -143,8 +143,10 @@ tiffyVideo.addEventListener("timeupdate", function() {
         else if (tiffyStage === "outcome") {
             tiffyStage = "finished";
             console.log("Tiffy's option finished:", tiffyChoice);
+            startDina();
+            
         }
-        startDina();
+        
     }
 });
 

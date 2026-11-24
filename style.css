@@ -231,3 +231,37 @@ h1 {
 #tiffy-text {
     font-size: 32px;
 }
+
+/* TIFFY'S TWO OPTIONS */
+
+#tiffy-message {
+    flex-direction: column;
+    gap: 20px;
+}
+
+#tiffy-message button {
+    padding: 15px 35px;
+    font-size: 18px;
+    min-width: 250px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#tiffy-message button:hover {
+    background: #cccccc;
+    transform: scale(1.05);
+}
+
+/* TIFFY'S POP-UP ANIMATION */
+
+#tiffy-message {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#tiffy-message h2,
+#tiffy-message button {
+    animation: popUp 0.5s ease-out;
+}

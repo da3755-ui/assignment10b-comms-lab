@@ -14,6 +14,8 @@ const tiffyText = document.getElementById("tiffy-text");
 let jazeiChoice = "";
 let tiffyHasLessMoney = false;
 let jazeiStage = "intro";
+let tiffyStage = "intro";
+let tiffyChoice = "";
 
 // START JAZEI'S STORY
 startButton.addEventListener("click", function() {
@@ -88,18 +90,22 @@ function chooseJazei(choice) {
 
 // START TIFFY'S STORY
 function startTiffy() {
-    alert("TIFFY'S STORY IS STARTING!");
+    
    
+
+    // Show Tiffy above Jazei
+    tiffyScene.style.display = "block";
+    tiffyScene.style.zIndex = "100";
 
     // Hide Jazei
     jazeiScene.style.display = "none";
 
-    // Show Tiffy
-    tiffyScene.style.display = "block";
-    tiffyScene.style.backgroundColor = "hotpink";
-
     // Hide previous messages
     tiffyMessage.style.display = "none";
+
+    // Reset Tiffy's story
+    tiffyStage = "intro";
+    tiffyChoice = "";
 
     // Remember which path Tiffy is on
     if (tiffyHasLessMoney) {
@@ -113,19 +119,49 @@ function startTiffy() {
     tiffyVideo.play();
 }
 
-// SHOW TIFFY'S OUTCOME AFTER 5 SECONDS
+// SHOW TIFFY'S CHOICES AFTER 5 SECONDS
 tiffyVideo.addEventListener("timeupdate", function() {
 
     if (tiffyVideo.currentTime >= 5 && !tiffyVideo.paused) {
 
         tiffyVideo.pause();
 
-        if (tiffyHasLessMoney) {
-            tiffyText.textContent = "TIFFY HAS LESS MONEY! SHE CAN ONLY BUY CHEAPER CHOCOLATE.";
-        } else {
-            tiffyText.textContent = "TIFFY HAS ENOUGH MONEY TO BUY HER FAVORITE CHOCOLATE!";
+        if (tiffyStage === "intro") {
+
+            if (tiffyHasLessMoney) {
+                tiffyText.textContent = "TIFFY HAS LESS MONEY! SHE CAN ONLY BUY CHEAPER CHOCOLATE.";
+            } else {
+                tiffyText.textContent = "TIFFY HAS ENOUGH MONEY TO BUY HER FAVORITE CHOCOLATE!";
+            }
+
+            tiffyMessage.style.display = "flex";
         }
 
-        tiffyMessage.style.display = "flex";
+        else if (tiffyStage === "outcome") {
+            tiffyStage = "finished";
+            console.log("Tiffy's option finished:", tiffyChoice);
+        }
     }
 });
+
+// HANDLE TIFFY'S TWO OPTIONS
+function chooseTiffy(choice) {
+
+    tiffyChoice = choice;
+
+    if (choice === "option1") {
+        console.log("TIFFY CHOSE OPTION 1");
+    }
+
+    else if (choice === "option2") {
+        console.log("TIFFY CHOSE OPTION 2");
+    }
+
+    // Hide the choices
+    tiffyMessage.style.display = "none";
+
+    // Play placeholder outcome
+    tiffyStage = "outcome";
+    tiffyVideo.currentTime = 0;
+    tiffyVideo.play();
+}

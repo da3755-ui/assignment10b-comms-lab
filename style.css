@@ -265,3 +265,8 @@ h1 {
 #tiffy-message button {
     animation: popUp 0.5s ease-out;
 }
+
+#tiffy-message h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}

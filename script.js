@@ -128,11 +128,7 @@ tiffyVideo.addEventListener("timeupdate", function() {
 
         if (tiffyStage === "intro") {
 
-            if (tiffyHasLessMoney) {
-                tiffyText.textContent = "TIFFY HAS LESS MONEY! SHE CAN ONLY BUY CHEAPER CHOCOLATE.";
-            } else {
-                tiffyText.textContent = "TIFFY HAS ENOUGH MONEY TO BUY HER FAVORITE CHOCOLATE!";
-            }
+    
 
             tiffyMessage.style.display = "flex";
         }

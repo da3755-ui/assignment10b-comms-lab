@@ -5,6 +5,11 @@ const jazeiVideo = document.getElementById("jazei-video");
 const jazeiChoices = document.getElementById("jazei-choices");
 const introVideo = document.querySelector(".video-section video");
 
+const tiffyScene = document.getElementById("tiffy-scene");
+const tiffyVideo = document.getElementById("tiffy-video");
+const tiffyMessage = document.getElementById("tiffy-message");
+const tiffyText = document.getElementById("tiffy-text");
+
 // Remember the story path
 let jazeiChoice = "";
 let tiffyHasLessMoney = false;
@@ -47,10 +52,9 @@ startButton.addEventListener("click", function() {
         }
 
         else if (jazeiStage === "outcome") {
-            // The chosen outcome has finished
-            console.log("Jazei's outcome finished!");
-            console.log("Next: Tiffy's story");
-        }
+        jazeiStage = "finished";
+        startTiffy();
+}
     }
 });
 
@@ -80,3 +84,48 @@ function chooseJazei(choice) {
     jazeiVideo.currentTime = 0;
     jazeiVideo.play();
 }
+
+
+// START TIFFY'S STORY
+function startTiffy() {
+    alert("TIFFY'S STORY IS STARTING!");
+   
+
+    // Hide Jazei
+    jazeiScene.style.display = "none";
+
+    // Show Tiffy
+    tiffyScene.style.display = "block";
+    tiffyScene.style.backgroundColor = "hotpink";
+
+    // Hide previous messages
+    tiffyMessage.style.display = "none";
+
+    // Remember which path Tiffy is on
+    if (tiffyHasLessMoney) {
+        console.log("TIFFY PATH: Cheaper chocolate");
+    } else {
+        console.log("TIFFY PATH: Expensive chocolate");
+    }
+
+    // Play Tiffy's placeholder video
+    tiffyVideo.currentTime = 0;
+    tiffyVideo.play();
+}
+
+// SHOW TIFFY'S OUTCOME AFTER 5 SECONDS
+tiffyVideo.addEventListener("timeupdate", function() {
+
+    if (tiffyVideo.currentTime >= 5 && !tiffyVideo.paused) {
+
+        tiffyVideo.pause();
+
+        if (tiffyHasLessMoney) {
+            tiffyText.textContent = "TIFFY HAS LESS MONEY! SHE CAN ONLY BUY CHEAPER CHOCOLATE.";
+        } else {
+            tiffyText.textContent = "TIFFY HAS ENOUGH MONEY TO BUY HER FAVORITE CHOCOLATE!";
+        }
+
+        tiffyMessage.style.display = "flex";
+    }
+});

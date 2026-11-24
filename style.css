@@ -66,23 +66,6 @@ body {
     pointer-events: none;
 }
 
-/* ABOUT SECTION */
-
-h1 {
-    position: relative;
-    color: white;
-    font-weight: bold;
-    font-size: 2em;
-    text-align: center;
-}
-
-.about-page p2 {
-    display: block;
-    color: white;
-    font-size: 2em;
-    text-align: center;
-}
-
 /* VENDING MACHINE SECTION */
 
 .vending-machine {
@@ -332,4 +315,68 @@ h1 {
 #dina-choices h2,
 #dina-choices button {
     animation: popUp 0.5s ease-out;
+}
+
+
+/* ABOUT SECTION */
+
+.about-page {
+    padding: 100px 20px;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+}
+
+.about-page h1 {
+    font-size: 42px;
+    letter-spacing: 4px;
+    margin-bottom: 35px;
+    color: white;
+}
+
+.synopsis {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #cccccc;
+    margin-bottom: 70px;
+}
+
+.about-page h2 {
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+}
+
+.credits {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+
+.credits strong {
+    color: white;
+}
+
+
+/* CAST AND CREDITS */
+
+.credit-group {
+    min-width: 220px;
+    text-align: center;
+}
+
+.credit-group h3 {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.credit-group p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #cccccc;
 }

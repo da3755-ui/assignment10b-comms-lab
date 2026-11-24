@@ -146,12 +146,21 @@ function chooseTiffy(choice) {
     tiffyChoice = choice;
 
     if (choice === "option1") {
-        console.log("TIFFY CHOSE OPTION 1");
+
+    // Tiffy chooses expensive chocolate
+    if (tiffyHasLessMoney) {
+        console.log("Tiffy cannot afford expensive chocolate!");
+        console.log("Tiffy is forced to buy cheap chocolate.");
+    } else {
+        console.log("Tiffy buys expensive chocolate!");
     }
+}
 
     else if (choice === "option2") {
-        console.log("TIFFY CHOSE OPTION 2");
-    }
+
+    // Tiffy chooses cheap chocolate
+    console.log("Tiffy buys cheap chocolate!");
+}
 
     // Hide the choices
     tiffyMessage.style.display = "none";

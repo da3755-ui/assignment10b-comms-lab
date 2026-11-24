@@ -54,23 +54,19 @@ startButton.addEventListener("click", function() {
     }
 });
 
-// HANDLE JAZEI'S THREE STORY PATHS
+// HANDLE JAZEI'S TWO STORY PATHS
+
 function chooseJazei(choice) {
 
     jazeiChoice = choice;
 
-    if (choice === "retry") {
-        console.log("PATH 1: Jazei tries again");
-        tiffyHasLessMoney = false;
-    }
-
-    else if (choice === "help") {
-        console.log("PATH 2: Tiffy pays for Jazei");
+    if (choice === "help") {
+        console.log("PATH 1: Tiffy pays for Jazei");
         tiffyHasLessMoney = true;
     }
 
     else if (choice === "leave") {
-        console.log("PATH 3: Jazei gives up and leaves");
+        console.log("PATH 2: Jazei gives up and leaves");
         tiffyHasLessMoney = false;
     }
 

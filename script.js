@@ -5,6 +5,11 @@ const jazeiVideo = document.getElementById("jazei-video");
 const jazeiChoices = document.getElementById("jazei-choices");
 const introVideo = document.querySelector(".video-section video");
 
+// Remember the story path
+let jazeiChoice = "";
+let tiffyHasLessMoney = false;
+let jazeiStage = "intro";
+
 // START JAZEI'S STORY
 startButton.addEventListener("click", function() {
 
@@ -13,6 +18,11 @@ startButton.addEventListener("click", function() {
 
     // Hide choices
     jazeiChoices.style.display = "none";
+
+    // Reset the story
+    jazeiChoice = "";
+    tiffyHasLessMoney = false;
+    jazeiStage = "intro";
 
     // Show Jazei's video
     jazeiScene.style.display = "block";
@@ -25,16 +35,52 @@ startButton.addEventListener("click", function() {
 
 });
 
-// SHOW CHOICES AFTER 5 SECONDS
-jazeiVideo.addEventListener("timeupdate", function() {
-    if (jazeiVideo.currentTime >= 5 && jazeiChoices.style.display !== "flex") {
+// CHECK WHAT PART OF JAZEI'S STORY IS PLAYING
+    jazeiVideo.addEventListener("timeupdate", function() {
+
+    if (jazeiVideo.currentTime >= 5 && !jazeiVideo.paused) {
         jazeiVideo.pause();
-        jazeiChoices.style.display = "flex";
+
+        if (jazeiStage === "intro") {
+            // Show the three choices
+            jazeiChoices.style.display = "flex";
+        }
+
+        else if (jazeiStage === "outcome") {
+            // The chosen outcome has finished
+            console.log("Jazei's outcome finished!");
+            console.log("Next: Tiffy's story");
+        }
     }
 });
 
-// HANDLE THE CHOICES
+// HANDLE JAZEI'S THREE STORY PATHS
 function chooseJazei(choice) {
-    console.log("Jazei chose:", choice);
+
+    jazeiChoice = choice;
+
+    if (choice === "retry") {
+        console.log("PATH 1: Jazei tries again");
+        tiffyHasLessMoney = false;
+    }
+
+    else if (choice === "help") {
+        console.log("PATH 2: Tiffy pays for Jazei");
+        tiffyHasLessMoney = true;
+    }
+
+    else if (choice === "leave") {
+        console.log("PATH 3: Jazei gives up and leaves");
+        tiffyHasLessMoney = false;
+    }
+
+    console.log("Tiffy has less money:", tiffyHasLessMoney);
+
+    // Hide the choices
     jazeiChoices.style.display = "none";
+
+    // Play the outcome placeholder
+    jazeiStage = "outcome";
+    jazeiVideo.currentTime = 0;
+    jazeiVideo.play();
 }

@@ -10,12 +10,19 @@ const tiffyVideo = document.getElementById("tiffy-video");
 const tiffyMessage = document.getElementById("tiffy-message");
 const tiffyText = document.getElementById("tiffy-text");
 
+const dinaScene = document.getElementById("dina-scene");
+const dinaVideo = document.getElementById("dina-video");
+const dinaChoices = document.getElementById("dina-choices");
+
 // Remember the story path
 let jazeiChoice = "";
 let tiffyHasLessMoney = false;
 let jazeiStage = "intro";
 let tiffyStage = "intro";
 let tiffyChoice = "";
+
+let dinaStage = "intro";
+let dinaChoice = "";
 
 // START JAZEI'S STORY
 startButton.addEventListener("click", function() {
@@ -137,6 +144,7 @@ tiffyVideo.addEventListener("timeupdate", function() {
             tiffyStage = "finished";
             console.log("Tiffy's option finished:", tiffyChoice);
         }
+        startDina();
     }
 });
 
@@ -169,4 +177,50 @@ function chooseTiffy(choice) {
     tiffyStage = "outcome";
     tiffyVideo.currentTime = 0;
     tiffyVideo.play();
+}
+
+// START DINA'S STORY
+function startDina() {
+    dinaScene.style.display = "block";
+    tiffyScene.style.display = "none";
+    dinaChoices.style.display = "none";
+
+    dinaStage = "intro";
+    dinaChoice = "";
+
+    dinaVideo.currentTime = 0;
+    dinaVideo.play();
+}
+
+// SHOW DINA'S CHOICES
+dinaVideo.addEventListener("timeupdate", function() {
+    if (dinaVideo.currentTime >= 5 && !dinaVideo.paused) {
+        dinaVideo.pause();
+
+        if (dinaStage === "intro") {
+            dinaChoices.style.display = "flex";
+        }
+        else if (dinaStage === "outcome") {
+            dinaStage = "finished";
+            console.log("Dina's outcome finished:", dinaChoice);
+        }
+    }
+});
+
+// HANDLE DINA'S CHOICES
+function chooseDina(choice) {
+    dinaChoice = choice;
+
+    if (choice === "card") {
+        console.log("Dina tries her card.");
+    }
+    else if (choice === "cash") {
+        console.log("Jazei returns to help Dina and gets chips!");
+    }
+
+    dinaChoices.style.display = "none";
+    dinaStage = "outcome";
+
+    dinaVideo.currentTime = 0;
+    dinaVideo.play();
 }

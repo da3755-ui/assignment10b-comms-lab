@@ -270,3 +270,65 @@ h1 {
     font-size: 32px;
     margin-bottom: 20px;
 }
+
+/* DINA'S STORY */
+
+#dina-scene {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    z-index: 110;
+}
+
+#dina-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#dina-choices {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+}
+
+#dina-choices h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#dina-choices button {
+    padding: 15px 35px;
+    font-size: 18px;
+    min-width: 250px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#dina-choices button:hover {
+    background: #cccccc;
+    transform: scale(1.05);
+}
+
+#dina-choices {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#dina-choices h2,
+#dina-choices button {
+    animation: popUp 0.5s ease-out;
+}

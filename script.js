@@ -25,9 +25,12 @@ startButton.addEventListener("click", function() {
 
 });
 
-// SHOW THREE CHOICES WHEN VIDEO ENDS
-jazeiVideo.addEventListener("ended", function() {
-    jazeiChoices.style.display = "flex";
+// SHOW CHOICES AFTER 5 SECONDS
+jazeiVideo.addEventListener("timeupdate", function() {
+    if (jazeiVideo.currentTime >= 5 && jazeiChoices.style.display !== "flex") {
+        jazeiVideo.pause();
+        jazeiChoices.style.display = "flex";
+    }
 });
 
 // HANDLE THE CHOICES

@@ -1,47 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Vending Machine</title> <!--add site title-->
+    <title>Vending Machine</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css?v=3"> <!--sync css-->
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
 
-<div class="backdrop"></div>    
+<div class="backdrop"></div>
 
-
+<!-- INTRO VIDEO -->
 <div class="video-section">
-<video autoplay muted loop playsinline>
-    <source src="assets/dina-tiff-aljazei-assignment9b.mp4" type="video/mp4">
-</video>
+    <video autoplay muted loop playsinline>
+        <source src="assets/dina-tiff-aljazei-assignment9b.mp4" type="video/mp4">
+    </video>
 
-<div class="shade">
-</div>
+    <div class="shade"></div>
 
+    <div class="watch-text">
+        <p>WANT TO WATCH THE FILM IN FULL?</p>
+    </div>
 
-
-<div class="watch-text"><p1>WANT TO WATCH THE FILM IN FULL?</p1></div>
-<p class="scroll-hint">SCROLL FOR MORE ABOUT THE FILM ↓</p>
-
+    <p class="scroll-hint">SCROLL FOR MORE ABOUT THE FILM ↓</p>
 </div>
 
 <button type="button" id="start-button">
     PUSH TO START
 </button>
 
-<!-- Jazei's Story -->
+<!-- JAZEI'S STORY -->
 <div id="jazei-scene">
-    <video id="jazei-video" playsinline>
-        <source src="assets/dina-tiff-aljazei-assignment9b.mp4" type="video/mp4">
-    </video>
 
+    <video id="jazei-video" playsinline preload="auto"></video>
+
+    <!-- FIRST DECISION -->
     <div id="jazei-choices">
         <h2>WHAT SHOULD JAZEI DO?</h2>
-        <button onclick="chooseJazei('help')">ASK FOR HELP</button>
-        <button onclick="chooseJazei('leave')">GIVE UP AND LEAVE</button>
+
+        <button onclick="chooseJazei('tryAgain')">
+            TRY AGAIN
+        </button>
+
+        <button onclick="chooseJazei('giveUp')">
+            GIVE UP AND LEAVE
+        </button>
     </div>
+
 </div>
 
 <div class="name-tags">THE VENDING<br>MACHINE</div>
@@ -50,7 +57,6 @@
 <!-- ABOUT SECTION -->
 <div class="about-page">
 
-    
     <h1>ABOUT THE FILM</h1>
 
     <p class="synopsis">
@@ -63,58 +69,78 @@
 
     <h2>MEET THE CHARACTERS</h2>
 
-   
-<h2>CAST & CREDITS</h2>
+    <h2>CAST & CREDITS</h2>
 
-<div class="credits">
-    <div class="credit-group">
-    <h3>CAST</h3>
-    <p>Aljazei</p>
-    <p>Tiffy</p>
-    <p>Dina</p>
-</div>
+    <div class="credits">
 
-    <div class="credit-group">
-        <h3>PRODUCTION</h3>
-        <p>Filming — Dina, Jazei & Tiffy</p>
-        <p>Editing — Dina</p>
-        <p>Website — Jazei, Tiffy & Dina</p>
+        <div class="credit-group">
+            <h3>CAST</h3>
+            <p>Aljazei</p>
+            <p>Tiffy</p>
+            <p>Dina</p>
+        </div>
+
+        <div class="credit-group">
+            <h3>PRODUCTION</h3>
+            <p>Filming — Dina, Jazei & Tiffy</p>
+            <p>Editing — Dina</p>
+            <p>Website — Jazei, Tiffy & Dina</p>
+        </div>
+
     </div>
-</div>
 
 </div>
+
 
 <!-- TIFFY'S STORY -->
 <div id="tiffy-scene">
 
-    <video id="tiffy-video" playsinline>
-        <source src="assets/dina-tiff-aljazei-assignment9b.mp4" type="video/mp4">
-    </video>
+    <video id="tiffy-video" playsinline preload="auto"></video>
 
-   <div id="tiffy-message">
-    <h2 id="tiffy-text"></h2>
+    <!-- SECOND DECISION -->
+    <div id="tiffy-message">
 
-    <h2>WHAT SHOULD TIFFY DO?</h2>
-    <button onclick="chooseTiffy('option1')">BUY EXPENSIVE COOKIE</button>
-<button onclick="chooseTiffy('option2')">BUY CHEAP COOKIE</button>
+        <h2 id="tiffy-text"></h2>
+
+        <h2>WHAT SHOULD TIFFY DO?</h2>
+
+        <button id="expensive-button" onclick="chooseTiffy('expensive')">
+            BUY EXPENSIVE COOKIE
+        </button>
+
+        <button onclick="chooseTiffy('cheap')">
+            BUY CHEAP COOKIE
+        </button>
+
+    </div>
+
 </div>
 
-</div>
 
 <!-- DINA'S STORY -->
 <div id="dina-scene">
-    <video id="dina-video" playsinline>
-        <source src="assets/dina-tiff-aljazei-assignment9b.mp4" type="video/mp4">
-    </video>
 
+    <video id="dina-video" playsinline preload="auto"></video>
+
+    <!-- THIRD DECISION -->
     <div id="dina-choices">
+
         <h2>WHAT SHOULD DINA DO?</h2>
 
-        <button onclick="chooseDina('card')">TRY HER CARD</button>
-        <button onclick="chooseDina('cash')">TRY PUTTING THE MONEY AGAIN</button>
+        <button onclick="chooseDina('tryAgain')">
+            TRY IT AGAIN
+        </button>
+
+        <button onclick="chooseDina('card')">
+            USE HER CARD
+        </button>
+
     </div>
+
 </div>
 
-<script src="script.js?v=5"></script>
+
+<script src="script.js?v=6"></script>
+
 </body>
 </html>

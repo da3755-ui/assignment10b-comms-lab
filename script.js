@@ -1,228 +1,352 @@
 
+// ==========================================
+// VIDEO FILES
+// ==========================================
+
+const VIDEO_FILES = {
+    jazeiProblem: "assets/JazeiProblem.mp4",
+    tiffyHelps: "assets/TiffyHelps.mp4",
+    jazeiGiveUp: "assets/JazeiGiveUp.mp4",
+    tiffyCheap: "assets/TiffyCheap.mp4",
+    tiffyExpensive: "assets/TiffyExpensive.mp4",
+    dinaCard: "assets/DinaCard.mp4",
+    dinaJazei: "assets/DinaJazei.mp4"
+};
+
+
+// ==========================================
+// GET HTML ELEMENTS
+// ==========================================
+const expensiveButton = document.getElementById("expensive-button");
 const startButton = document.getElementById("start-button");
+const introVideo = document.querySelector(".video-section video");
+
 const jazeiScene = document.getElementById("jazei-scene");
 const jazeiVideo = document.getElementById("jazei-video");
 const jazeiChoices = document.getElementById("jazei-choices");
-const introVideo = document.querySelector(".video-section video");
 
 const tiffyScene = document.getElementById("tiffy-scene");
 const tiffyVideo = document.getElementById("tiffy-video");
 const tiffyMessage = document.getElementById("tiffy-message");
-const tiffyText = document.getElementById("tiffy-text");
 
 const dinaScene = document.getElementById("dina-scene");
 const dinaVideo = document.getElementById("dina-video");
 const dinaChoices = document.getElementById("dina-choices");
 
-// Remember the story path
-let jazeiChoice = "";
-let tiffyHasLessMoney = false;
-let jazeiStage = "intro";
-let tiffyStage = "intro";
-let tiffyChoice = "";
 
-let dinaStage = "intro";
+// ==========================================
+// REMEMBER THE AUDIENCE'S DECISIONS
+// ==========================================
+
+let jazeiChoice = "";
+let tiffyChoice = "";
 let dinaChoice = "";
 
-// START JAZEI'S STORY
-startButton.addEventListener("click", function() {
+let currentVideo = null;
 
-    // Pause the intro
-    introVideo.pause();
 
-    // Hide choices
-    jazeiChoices.style.display = "none";
+// ==========================================
+// PLAY A VIDEO
+// ==========================================
 
-    // Reset the story
-    jazeiChoice = "";
-    tiffyHasLessMoney = false;
-    jazeiStage = "intro";
+function playClip(videoElement, filename, onFinished) {
 
-    // Show Jazei's video
-    jazeiScene.style.display = "block";
+    // Stop any previous playback
+    videoElement.pause();
 
-    // Play video from beginning
-    jazeiVideo.currentTime = 0;
-    jazeiVideo.play().catch(function(error) {
+    // Remove the previous video
+    videoElement.removeAttribute("src");
+    videoElement.load();
+
+    // Assign the new video
+    videoElement.src = filename;
+
+    // Wait until the entire clip finishes
+    videoElement.onended = function() {
+
+        if (onFinished) {
+            onFinished();
+        }
+
+    };
+
+    // Report missing files or playback errors
+    videoElement.onerror = function() {
+        console.error("Could not load video:", filename);
+    };
+
+    // Start playback
+    videoElement.load();
+
+    videoElement.play().catch(function(error) {
         console.error("Video playback failed:", error);
     });
 
-});
-
-// CHECK WHAT PART OF JAZEI'S STORY IS PLAYING
-    jazeiVideo.addEventListener("timeupdate", function() {
-
-    if (jazeiVideo.currentTime >= 5 && !jazeiVideo.paused) {
-        jazeiVideo.pause();
-
-        if (jazeiStage === "intro") {
-            // Show the three choices
-            jazeiChoices.style.display = "flex";
-        }
-
-        else if (jazeiStage === "outcome") {
-        jazeiStage = "finished";
-        startTiffy();
+    currentVideo = videoElement;
 }
-    }
+
+
+// ==========================================
+// RESET THE FILM
+// ==========================================
+
+function resetStory() {
+
+    jazeiChoice = "";
+    tiffyChoice = "";
+    dinaChoice = "";
+
+    [jazeiVideo, tiffyVideo, dinaVideo].forEach(function(video) {
+        video.pause();
+        video.onended = null;
+    });
+
+    jazeiChoices.style.display = "none";
+    tiffyMessage.style.display = "none";
+    dinaChoices.style.display = "none";
+
+    jazeiScene.style.display = "none";
+    tiffyScene.style.display = "none";
+    dinaScene.style.display = "none";
+}
+
+
+// ==========================================
+// START THE FILM
+// ==========================================
+
+startButton.addEventListener("click", function() {
+
+    // Stop the introductory video
+    introVideo.pause();
+
+    // Reset previous choices and scenes
+    resetStory();
+
+    // Show Jazei's scene
+    jazeiScene.style.display = "block";
+
+    // Play clip 1
+    playClip(
+        jazeiVideo,
+        VIDEO_FILES.jazeiProblem,
+        function() {
+
+            // Clip 1 finished: show the first decision
+            jazeiChoices.style.display = "flex";
+
+        }
+    );
+
 });
 
-// HANDLE JAZEI'S TWO STORY PATHS
+
+// ==========================================
+// FIRST DECISION: JAZEI
+// ==========================================
 
 function chooseJazei(choice) {
 
     jazeiChoice = choice;
 
-    if (choice === "help") {
-        console.log("PATH 1: Tiffy pays for Jazei");
-        tiffyHasLessMoney = true;
-    }
-
-    else if (choice === "leave") {
-        console.log("PATH 2: Jazei gives up and leaves");
-        tiffyHasLessMoney = false;
-    }
-
-    console.log("Tiffy has less money:", tiffyHasLessMoney);
-
-    // Hide the choices
+    // Hide the decision buttons
     jazeiChoices.style.display = "none";
 
-    // Play the outcome placeholder
-    jazeiStage = "outcome";
-    jazeiVideo.currentTime = 0;
-    jazeiVideo.play();
+    if (choice === "tryAgain") {
+
+        console.log("Jazei tries again.");
+
+        // Go to clip 2
+        // Tiffy helps Jazei and observes the cookies
+
+        playClip(
+            jazeiVideo,
+            VIDEO_FILES.tiffyHelps,
+            function() {
+
+                // Clip 2 finished: show Tiffy's decision
+                showTiffyChoices();
+
+            }
+        );
+
+    }
+
+    else if (choice === "giveUp") {
+
+        console.log("Jazei gives up and leaves.");
+
+        // Go to clip 3
+        // Jazei leaves and Tiffy approaches the machine
+
+        playClip(
+            jazeiVideo,
+            VIDEO_FILES.jazeiGiveUp,
+            function() {
+
+                // Clip 3 finished: show Tiffy's decision
+                showTiffyChoices();
+
+            }
+        );
+
+    }
+
 }
 
 
-// START TIFFY'S STORY
-function startTiffy() {
-    
-   
+// ==========================================
+// SECOND DECISION: TIFFY
+// ==========================================
 
-    // Show Tiffy above Jazei
-    tiffyScene.style.display = "block";
-    tiffyScene.style.zIndex = "100";
+function showTiffyChoices() {
 
-    // Hide Jazei
+    // Switch to Tiffy's scene
     jazeiScene.style.display = "none";
+    tiffyScene.style.display = "block";
 
-    // Hide previous messages
-    tiffyMessage.style.display = "none";
-
-    // Reset Tiffy's story
-    tiffyStage = "intro";
-    tiffyChoice = "";
-
-    // Remember which path Tiffy is on
-    if (tiffyHasLessMoney) {
-        console.log("TIFFY PATH: Cheaper chocolate");
-    } else {
-        console.log("TIFFY PATH: Expensive chocolate");
+    //check if tiffy helped jazei
+    if (jazeiChoice==="tryAgain"){
+        //tiffy wont be able to buy expensive cookie
+        expensiveButton.style.display ="none";
+    } else{
+        //tiffy can see both choices
+        expensiveButton.style.display ="block";
     }
 
-    // Play Tiffy's placeholder video
-    tiffyVideo.currentTime = 0;
-    tiffyVideo.play();
+    // Show the choices
+    tiffyMessage.style.display = "flex";
+
 }
 
-// SHOW TIFFY'S CHOICES AFTER 5 SECONDS
-tiffyVideo.addEventListener("timeupdate", function() {
 
-    if (tiffyVideo.currentTime >= 5 && !tiffyVideo.paused) {
-
-        tiffyVideo.pause();
-
-        if (tiffyStage === "intro") {
-
-    
-
-            tiffyMessage.style.display = "flex";
-        }
-
-        else if (tiffyStage === "outcome") {
-            tiffyStage = "finished";
-            console.log("Tiffy's option finished:", tiffyChoice);
-            startDina();
-            
-        }
-        
-    }
-});
-
-// HANDLE TIFFY'S TWO OPTIONS
 function chooseTiffy(choice) {
 
     tiffyChoice = choice;
 
-    if (choice === "option1") {
-
-    // Tiffy chooses expensive chocolate
-    if (tiffyHasLessMoney) {
-        console.log("Tiffy cannot afford expensive chocolate!");
-        console.log("Tiffy is forced to buy cheap chocolate.");
-    } else {
-        console.log("Tiffy buys expensive chocolate!");
-    }
-}
-
-    else if (choice === "option2") {
-
-    // Tiffy chooses cheap chocolate
-    console.log("Tiffy buys cheap chocolate!");
-}
-
-    // Hide the choices
+    // Hide the decision buttons
     tiffyMessage.style.display = "none";
 
-    // Play placeholder outcome
-    tiffyStage = "outcome";
-    tiffyVideo.currentTime = 0;
-    tiffyVideo.play();
-}
+    if (choice === "expensive") {
 
-// START DINA'S STORY
-function startDina() {
-    dinaScene.style.display = "block";
-    tiffyScene.style.display = "none";
-    dinaChoices.style.display = "none";
+        console.log("Tiffy buys the expensive cookie.");
 
-    dinaStage = "intro";
-    dinaChoice = "";
+        // Go to clip 5
+        // Tiffy buys the expensive cookie.
+        // Dina arrives and her 50 AED bill fails.
 
-    dinaVideo.currentTime = 0;
-    dinaVideo.play();
-}
+        playClip(
+            tiffyVideo,
+            VIDEO_FILES.tiffyExpensive,
+            function() {
 
-// SHOW DINA'S CHOICES
-dinaVideo.addEventListener("timeupdate", function() {
-    if (dinaVideo.currentTime >= 5 && !dinaVideo.paused) {
-        dinaVideo.pause();
+                // Clip 5 finished: show Dina's decision
+                showDinaChoices();
 
-        if (dinaStage === "intro") {
-            dinaChoices.style.display = "flex";
-        }
-        else if (dinaStage === "outcome") {
-            dinaStage = "finished";
-            console.log("Dina's outcome finished:", dinaChoice);
-        }
+            }
+        );
+
     }
-});
 
-// HANDLE DINA'S CHOICES
+    else if (choice === "cheap") {
+
+        console.log("Tiffy buys the cheap cookie.");
+
+        // Go to clip 4
+        // Tiffy buys the cheap cookie.
+        // Dina arrives and her 50 AED bill fails.
+
+        playClip(
+            tiffyVideo,
+            VIDEO_FILES.tiffyCheap,
+            function() {
+
+                // Clip 4 finished: show Dina's decision
+                showDinaChoices();
+
+            }
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// THIRD DECISION: DINA
+// ==========================================
+
+function showDinaChoices() {
+
+    // Switch to Dina's scene
+    tiffyScene.style.display = "none";
+    dinaScene.style.display = "block";
+
+    // Show the choices
+    dinaChoices.style.display = "flex";
+
+}
+
+
 function chooseDina(choice) {
+
     dinaChoice = choice;
 
-    if (choice === "card") {
-        console.log("Dina tries her card.");
-    }
-    else if (choice === "cash") {
-        console.log("Jazei returns to help Dina and gets chips!");
-    }
-
+    // Hide the decision buttons
     dinaChoices.style.display = "none";
-    dinaStage = "outcome";
 
-    dinaVideo.currentTime = 0;
-    dinaVideo.play();
+    if (choice === "card") {
+
+        console.log("Dina uses her card.");
+
+        // Go to clip 6
+        // Dina buys chocolate milk using her card.
+
+        playClip(
+            dinaVideo,
+            VIDEO_FILES.dinaCard,
+            function() {
+
+                finishFilm();
+
+            }
+        );
+
+    }
+
+    else if (choice === "tryAgain") {
+
+        console.log("Dina tries the bill again. Jazei helps her.");
+
+        // Go to clip 7
+        // Jazei helps Dina and buys herself chips.
+
+        playClip(
+            dinaVideo,
+            VIDEO_FILES.dinaJazei,
+            function() {
+
+                finishFilm();
+
+            }
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// END OF THE FILM
+// ==========================================
+
+function finishFilm() {
+
+    console.log("The film has finished.");
+
+    // Keep the final frame visible
+    if (currentVideo) {
+        currentVideo.pause();
+    }
+
 }
